@@ -1,0 +1,72 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-12-06T14:00:00+00:00",
+    "name": "Jobsito",
+    "author": "adonio.torres@example.com",
+    "description": "Egg para ejecutar Jobsito, un bot en Node.js con estructura personalizada.",
+    "features": null,
+    "docker_images": {
+        "Nodejs 21": "ghcr.io/parkervcp/yolks:nodejs_21"
+    },
+    "file_denylist": [],
+    "startup": "node {{BOT_JS_FILE}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Bot iniciado correctamente\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!/bin/bash\r\n\r\napt update\r\napt -y install tar curl git\r\n\r\nmkdir -p /mnt/server\r\ncd /mnt/server\r\n\r\n# Si usas GitHub para clonar tu proyecto:\r\nif [ -n \"${GIT_REPO}\" ]; then\r\n    git clone ${GIT_REPO} .\r\n    git checkout ${BRANCH}\r\nfi\r\n\r\nif [ -f package.json ]; then\r\n    npm install --production\r\nfi\r\n\r\necho \"-----------------------------------------\"\r\necho \"Instalación completada.\"\r\necho \"-----------------------------------------\"",
+            "container": "node:21-bullseye-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Archivo principal",
+            "description": "El archivo principal que se ejecutará (por defecto src/index.js).",
+            "env_variable": "BOT_JS_FILE",
+            "default_value": "src/index.js",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "GitHub Repo",
+            "description": "URL del repositorio GitHub que contiene tu proyecto.",
+            "env_variable": "GIT_REPO",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Branch",
+            "description": "Rama del repositorio que deseas usar.",
+            "env_variable": "BRANCH",
+            "default_value": "main",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Token del Bot",
+            "description": "Token de tu bot en Discord.",
+            "env_variable": "TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        }
+    ]
+}
