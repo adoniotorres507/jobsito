@@ -97,7 +97,7 @@ Problemas Comunes
 
 Créditos
 
-Autor: Adonio Torres.
+Autor: Austin Morales.
 
 Docker Image: ghcr.io/parkervcp/yolks.
 
